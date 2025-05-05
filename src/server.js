@@ -1,6 +1,9 @@
 import Fastify from 'fastify'
+import dotenv from 'dotenv'
 import {DB} from './db/db.js'
 import {ObjectId} from 'mongodb'
+
+dotenv.config()
 
 const server = async () => {
   try {
@@ -34,8 +37,8 @@ const server = async () => {
     })
 
     const database = new DB(
-      'mongodb://Q4VXIOH8KQ:haguzhn9ubk6fgyg53@akdev.developer.akunah.com:54103/promsv2?authSource=admin&authMechanism=SCRAM-SHA-1',
-      'promsv2',
+      process.env.url,
+      process.env.db_name,
     )
 
     fastify.get('/getData', async(req, res) => {
@@ -68,12 +71,15 @@ const server = async () => {
 }
 
 const connect_server = (fastify) => {
-  fastify.listen({port: 8000}, function (err, address) {
+  fastify.listen({
+    port: 5000,
+    host: '0.0.0.0'
+  }, function (err, address) {
     if (err) {
       fastify.log.error(err)
       process.exit(1)
     }
-    console.log(`Server Listen on Port ${8000}`);
+    console.log(`Server Listen on Port ${5000}`);
   })
 }
 

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: load-testing-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: load-testing-app
+  template:
+    metadata:
+      labels:
+        app: load-testing-app
+    spec:
+      containers:
+      - name: load-testing-app
+        image: load-test-k8s
+        ports:
+        - containerPort: 5000
