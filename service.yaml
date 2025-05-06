@@ -7,6 +7,6 @@ spec:
   selector:
     app: k8s-load
   ports:
-    - port: 8000
-      targetPort: 8000
+    - port: 5000
+      targetPort: 5000
       nodePort: 30001
