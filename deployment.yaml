@@ -1,19 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: load-testing-app
+  name: k8s-load
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: load-testing-app
+      app: k8s-load
   template:
     metadata:
       labels:
-        app: load-testing-app
+        app: k8s-load
     spec:
       containers:
-      - name: load-testing-app
-        image: load-test-k8s
+      - name: k8s-load
+        image: k8s-app:latest
+        imagePullPolicy: Never
         ports:
         - containerPort: 5000
+        env:
+        - name: url
+          value: mongodb://Q4VXIOH8KQ:haguzhn9ubk6fgyg53@akdev.developer.akunah.com:54103/promsv2?authSource=admin&authMechanism=SCRAM-SHA-1
+        - name: db_name
+          value: promsv2
+

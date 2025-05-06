@@ -36,6 +36,8 @@ const server = async () => {
       }
     })
 
+    console.log(process.env.url,process.env.db_name)
+
     const database = new DB(
       process.env.url,
       process.env.db_name,
