@@ -20,7 +20,7 @@ spec:
         - containerPort: 5000
         env:
         - name: url
-          value: mongodb://Q4VXIOH8KQ:haguzhn9ubk6fgyg53@akdev.developer.akunah.com:54103/promsv2?authSource=admin&authMechanism=SCRAM-SHA-1
+          value: mongodb://Q4VXIOH8KQ:haguzhn9ubk6fgyg53@3.27.173.38:54103/promsv2?authSource=admin&authMechanism=SCRAM-SHA-1
         - name: db_name
           value: promsv2
 
