@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: k8s-load
+  labels:
+    app: k8s-load
+spec:
+  containers:
+    - name: k8s-load
+      
+    
