@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: k8s-load
 spec:
-  replicas: 2
   selector:
     matchLabels:
       app: k8s-load
@@ -18,9 +17,15 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 5000
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
         env:
         - name: url
           value: mongodb://Q4VXIOH8KQ:haguzhn9ubk6fgyg53@3.27.173.38:54103/promsv2?authSource=admin&authMechanism=SCRAM-SHA-1
         - name: db_name
           value: promsv2
-

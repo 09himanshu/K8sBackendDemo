@@ -4,8 +4,8 @@ metadata:
   name: k8s-load
   labels:
     app: k8s-load
+    tier: backend
 spec:
   containers:
     - name: k8s-load
-      
-    
+      image: k8s-app:latest
