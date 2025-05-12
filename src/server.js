@@ -1,44 +1,18 @@
 import Fastify from 'fastify'
 import dotenv from 'dotenv'
-import {DB} from './db/db.js'
 import {ObjectId} from 'mongodb'
+import {DB} from './db/db.js'
+import logger from './utils/log.utils.js'
 
 dotenv.config()
 
 const server = async () => {
   try {
-    const fastify = Fastify({
-      logger: {
-        transport: {
-          target: 'pino-pretty',
-          options: {
-            translateTime: 'HH:MM:ss Z',
-            ignore: 'pid,hostname',
-          }
-        },
-        serializers: {
-          req(req) {
-            return {
-              method: req.method,
-              url: req.url,
-              headers: req.headers,
-              hostname: req.hostname,
-              remoteAddress: req.ip,
-              remotePort: req.socket.remotePort
-            };
-          },
-          res(res) {
-            return {
-              statusCode: res.statusCode
-            };
-          }
-        }
-      }
-    })
+    const fastify = Fastify({logger})
 
     console.log(process.env.url,process.env.db_name)
 
-    const database = new DB(
+    global.dbService = new DB(
       process.env.url,
       process.env.db_name,
     )
