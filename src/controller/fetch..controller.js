@@ -1,5 +1,7 @@
 import {faker} from '@faker-js/faker'
 
+const status = [0,1]
+
 const getData = async (req, res) => {
     try {
         let data = await global.dbService.find('test_collection')
@@ -14,13 +16,14 @@ const insertData = async (req, res) => {
     try {
         let body = {
             name: faker.person.fullName(),
-            email: faker.internet.email(),
+            email: faker.internet.email().toLowerCase(),
             phone: faker.phone.number(),
             address: faker.location.streetAddress(),
-            company: faker.company.name()
+            company: faker.company.name(),
+            status: status[Math.round(Math.random())]
         }
-        body.email = body.email.toLowerCase()
-        console.log(body.email)
+        
+        
         await global.dbService.insert('test_collection', body)
         res.status(200).send({ status: true, data: 'Data inserted sucessfully' })
     } catch (err) {
@@ -31,8 +34,8 @@ const insertData = async (req, res) => {
 
 const updateData = async (req, res) => {
     try {
-        let email = req.params.email
-        let filter = {email}
+        let status = req.params.status
+        let filter = {status}
         let updateDoc = {
             name: faker.person.fullName(),
             phone: faker.phone.number(),

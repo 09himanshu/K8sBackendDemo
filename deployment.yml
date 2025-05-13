@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-app
+  labels:
+    app: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-app
+  template:
+    metadata:
+      name: simple-backend-app
+      labels:
+          app: backend-app
+    spec:
+      containers:
+        - name: simple-backend-app
+          image: sample_app
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5000
+          env:
+            - name: url
+              value: mongodb://Q4VXIOH8KQ:haguzhn9ubk6fgyg53@akdev.developer.akunah.com:54103/promsv2?authSource=admin&authMechanism=SCRAM-SHA-1
+            - name: db_name
+              value: promsv2
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+      restartPolicy: Always
