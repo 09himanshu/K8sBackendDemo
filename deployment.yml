@@ -17,8 +17,7 @@ spec:
     spec:
       containers:
         - name: simple-backend-app
-          image: sample_app
-          imagePullPolicy: Never
+          image: 09himanshu/sample_app:1.0
           ports:
             - containerPort: 5000
           env:
